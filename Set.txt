@@ -1,0 +1,188 @@
+What is a Set?
+ 
+ -> STL container used to store unique values.
+ -> Values are stored in ordered state(increasing order / decreasing order).
+ -> No indexing, elements are identified by their own values.
+ -> once value is inserted in a set, it cannot be modified.
+
+Advantages of Set
+ -> unique values
+ -> ordered
+ -> dynamic size, no overflowing errors
+ -> faster
+
+Disadvantages of Set
+
+ -> cannot access elements using indexing
+ -> more memory than array
+ -> not suitable for large datasets
+
+Declaration of a Set
+
+ #include<set>
+ Set <datatype> set_name;
+ Set <int> Set1 = {1, 2, 3, 4};
+
+ **By default, values are stored in increasing order.
+
+ Set <datatype, greater <datatype>> set_name;
+
+Inserting elements into a Set
+
+ set_name.insert(value);
+ Set1.insert(4);
+ Set1.insert(3);
+
+ ** returns an iterator to the inserted value
+     iterator = iterate through STL containers
+
+Traversal of a Set
+
+ Iterator - for traversing a set
+ set_name.begin() - iterator pointing to the first element of my set.
+ set_name.end() - iterator pointing to the position after the last element of set.
+
+Deleting elements from a Set
+
+ 1. set_name.erase(value); 
+ 2. set_name.erase(position);
+ 3. set_name.erase(start_pos, end_pos);
+ [deletes elements from start pos including it, till end pos, excluding end pos]
+ 
+ Time Complexity for 1. & 2. = O(log N)
+ Time Complexity for 3. = O(N) where N is no. of elements in the range
+
+Member functions of a Set container
+
+ -> size(), maxsize() - max no. of elements set can hold
+ -> empty() - returns True if empty else false
+ -> clear() - removes all elements from set
+ -> find() - returns position of element if present, else returns end iterator
+ -> count() - returns no. of occurences of an element.
+ -> lower_bound() - returns element if present, else returns just greater value
+     Example : s = [10, 20, 30, 40]
+               s.lower_bound(25) -> 30
+ -> upper_bound() - returns the next greater value
+     Example : s = [10, 20, 30, 40]
+               s.upper_bound(20) -> 30
+ -> rbegin() - return to first element of set in reverse order
+ -> rend() - return to position after last element in reverse order
+
+unordered_set
+
+ -> values are stored in unordered fashion
+ -> unique values, values will be identified by itself, values cannot be modified inside set.
+
+  **avg time complexity of insertion, deletion and search = O(1)
+  using Hashing
+
+ example : 23, 45, 67, 32
+           hash function = mod 10
+           23 mod 10 = 3
+           
+           2 -> 32
+           3 -> 23
+           5 -> 45
+           7 -> 67
+
+Member Functions of unordered_set
+
+ 1. Insert
+     Time Complexity:
+         single element -> O(1) avg
+                           O(N) worst (if size >= capacity, then rehashing)
+         multiple elements -> O(n) avg - n is no. of elements being inserted
+                              O(n * (N + 1)) worst 
+                                     N = size of unordered set
+
+ 2. Deletion
+     erase(value)
+     erase(iteration)
+     erase(start_itr, end_itr)
+
+     Time Complexity :
+          single element -> O(1) avg
+                            O(N) worst
+
+ 3. find(v)
+      Time Complexity : 
+                O(1) avg
+                O(N) worst
+
+ 4. count(v)
+      Time Complexity :
+              O(1) avg
+              O(N) worst case
+
+    Hashing : 
+        - Load factor : 
+               load_factor() -> size of unordered set / bucket_count
+        - rehash(x):
+               sets the no. of bucket to x or more
+                    Time Complexity : 
+                              O(N) avg
+                              O(N^2) worst.
+
+multiset
+
+ -> it can store duplicate values
+ -> ordered (asc or desc)
+ -> value will be identified by itself
+ -> value cannot be modified in multiset.
+
+Member Functions of multiset
+
+ 1.Insert
+     insert() -> O(log N)
+
+ 2. Deletion
+     erase(value) -> O(log N)
+       example : ms = 1 2 2 3 3
+                 ms.erase(2)
+     erase(position)
+       example : ms = 1 2 2 3 3
+     erase(start_pos, end_pos) -> O(N)
+
+ 3. find()
+      -> lower bound of element searched if found else end iterator
+            example : ms = 1 2 2 2 3 3
+                      ms.find(2)
+         time complexity = O(log N)
+
+ 4.count()
+    -> no. of occurences
+         time complexity = O(k + log N) , k = no. of occurences
+
+ 5. lower_bound()
+     -> iterator pointing to first occurence of val if present else position the next greater value
+
+ 6. upper_bound()
+     -> position of next greater value.   
+    Time complexity of both = O(log N)
+
+unordered_multiset
+
+ -> allows duplicate values
+ -> values are not ordered
+ -> value will be identified bt itself
+ -> values cannot be modified.
+
+Member Functions of unordered_multiset
+
+ 1. Insert 
+     single element - O(1) avg, O(N) worst
+     multiple elements - O(n) avg, O(n * (N + 1)) worst
+
+ 2.Deletion 
+    erase()
+        O(1) avg
+        O(N) worst
+
+ 3. find
+      find()
+          O(1) avg
+          O(N) worst
+
+ 4.count()
+       O(n) avg  where n->no.of occurences
+       O(N) worst where N -> sizes        
